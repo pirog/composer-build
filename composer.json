@@ -23,6 +23,9 @@
     "drupal/config_direct_save": "^1.0"
   },
   "require-dev": {
+    "overtrue/phplint": "*",
+    "squizlabs/php_codesniffer": "2.*",
+    "drupal/coder" : "dev-8.x-2.x",
     "mikey179/vfsstream": "^1.2",
     "behat/behat": "3.*",
     "behat/mink": "^1.7",
@@ -64,6 +67,11 @@
     "post-create-project-cmd": [
       "@drupal-scaffold",
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "test": [
+      "./vendor/bin/phplint --no-cache",
+      "./vendor/bin/phpcs --config-set installed_paths ./../../drupal/coder/coder_sniffer",
+      "./vendor/bin/phpcs -n --report=full --standard=Drupal --ignore=*.tpl.php --extensions=install,module,php,inc sites/all/modules/custom"
     ]
   },
   "extra": {

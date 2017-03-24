@@ -75,6 +75,7 @@ dependencies:
       fi
 test:
   override:
+    - composer test
     - run-behat
   post:
     - terminus secrets:set -n "$TERMINUS_SITE.$TERMINUS_ENV" token "$GITHUB_TOKEN" --file='github-secrets.json' --clear --skip-if-empty
